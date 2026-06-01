@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Job Application Reviewer</title>
 </head>
-
 <body>
   <main class="app">
     <h1>Application Reviewer</h1>
@@ -113,6 +113,36 @@
     ></section>
   </main>
 
-  <script></script>
+  <script>
+    const applicationForm = document.querySelector("#application-form");
+
+const companyInput = document.querySelector("#company-input");
+const positionInput = document.querySelector("#position-input");
+const statusInput = document.querySelector("#status-input");
+
+const searchInput = document.querySelector("#search-input");
+const statusFilter = document.querySelector("#status-filter");
+
+const applicationListContainer = document.querySelector("#application-list-container");
+
+const statTotal = document.querySelector("#stat-total .stat-value");
+const statReview = document.querySelector("#stat-review .stat-value");
+const statInterview = document.querySelector("#stat-interview .stat-value");
+const statOffer = document.querySelector("#stat-offer .stat-value");
+const statRejected = document.querySelector("#stat-rejected .stat-value");
+
+const application = [];
+const company = companyInput.value;
+const position = positionInput.value;
+const status = statusInput.value;
+
+const job = {
+  comapany: company,
+  position :position,
+  status: status
+}
+application.push(job);
+
+  </script>
 </body>
 </html>
