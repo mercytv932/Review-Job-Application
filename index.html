@@ -1,65 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Review Job Application</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Application Reviewer</title>
 </head>
+
 <body>
-<h1>Application Reviewer</h1>
-<input type="text" id="companyInput" placeholder="Company name...">
-<input type="text" id="positionInput" placeholder="Position...">
+  <main class="app">
+    <h1>Application Reviewer</h1>
 
-<div class="application-status-container">
-  <label for="app-status" class="status-label">Application Status:</label>
-  <select id="app-status" name="applicationStatus" class="status-select modern-dropdown" required>
-    <option value="" disabled selected>Select status...</option>
-    <option value="review" class="status-option option-review"> Review</option>
-    <option value="interview" class="status-option option-interview">Interview</option>
-    <option value="offer" class="status-option option-offer">Offer </option>
-    <option value="rejected" class="status-option option-rejected">Rejected</option>
-  </select>
-</div>
+    <form class="application-form" id="application-form">
+      <div class="form-group">
+        <label for="company-input">Company Name</label>
+        <input
+          type="text"
+          id="company-input"
+          name="company"
+          placeholder="Company name..."
+          required
+        />
+      </div>
 
-     <button class="add">Add</button>
-     <input type="text"id="SearchInput" placeholder="Search applications...">
+      <div class="form-group">
+        <label for="position-input">Position</label>
+        <input
+          type="text"
+          id="position-input"
+          name="position"
+          placeholder="Position..."
+          required
+        />
+      </div>
 
-     <div class="filters-container">
-    <div class="filter-group">
-        <label for="app-status-filter" class="filter-label">Filter by Status:</label>
-        <select id="app-status-filter" class="modern-dropdown filter-control" name="appStatusFilter">
-            <option value="all">All Applications</option>
-            <option value="review"> Review</option>
-            <option value="interview">Interview</option>
-            <option value="offer">Offer</option>
-            <option value="rejected">Rejected</option>
+      <div class="form-group">
+        <label for="status-input">Application Status</label>
+        <select
+          id="status-input"
+          name="applicationStatus"
+          class="modern-dropdown"
+          required
+        >
+          <option value="" disabled selected>Select status...</option>
+          <option value="review">Review</option>
+          <option value="interview">Interview</option>
+          <option value="offer">Offer</option>
+          <option value="rejected">Rejected</option>
         </select>
-    </div>
-</div>
+      </div>
 
-    <section class="dashboard-stats" id="app-stats">
-        <div class="stat-card" id="stat-total">
-            <h3 class="stat-title">Total Applications</h3>
-            <p class="stat-value">12</p>
-        </div>
-        <div class="stat-card" id="stat-interviewing">
-            <h3 class="stat-title">Interviewing</h3>
-            <p class="stat-value">3</p>
-        </div>
-        <div class="stat-card" id="stat-offers">
-            <h3 class="stat-title">Offers</h3>
-            <p class="stat-value">1</p>
-        </div>
-        <div class="stat-card" id="stat-rejected">
-            <h3 class="stat-title">Archived</h3>
-            <p class="stat-value">8</p>
-        </div>
+      <button type="submit" class="add-button">Add</button>
+    </form>
+
+    <section class="controls">
+      <div class="form-group">
+        <label for="search-input">Search Applications</label>
+        <input
+          type="text"
+          id="search-input"
+          name="search"
+          placeholder="Search applications..."
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="status-filter">Filter by Status</label>
+        <select
+          id="status-filter"
+          name="statusFilter"
+          class="modern-dropdown"
+        >
+          <option value="all">All Applications</option>
+          <option value="review">Review</option>
+          <option value="interview">Interview</option>
+          <option value="offer">Offer</option>
+          <option value="rejected">Rejected</option>
+        </select>
+      </div>
     </section>
 
-    <div id="applicationListContainer"></div>
+    <section class="dashboard-stats" id="app-stats">
+      <div class="stat-card" id="stat-total">
+        <h2 class="stat-title">Total Applications</h2>
+        <p class="stat-value">12</p>
+      </div>
 
+      <div class="stat-card" id="stat-review">
+        <h2 class="stat-title">In Review</h2>
+        <p class="stat-value">0</p>
+      </div>
 
+      <div class="stat-card" id="stat-interview">
+        <h2 class="stat-title">Interviewing</h2>
+        <p class="stat-value">3</p>
+      </div>
 
+      <div class="stat-card" id="stat-offer">
+        <h2 class="stat-title">Offers</h2>
+        <p class="stat-value">1</p>
+      </div>
+
+      <div class="stat-card" id="stat-rejected">
+        <h2 class="stat-title">Rejected</h2>
+        <p class="stat-value">8</p>
+      </div>
+    </section>
+
+    <section
+      id="application-list-container"
+      class="application-list"
+      aria-live="polite"
+    ></section>
+  </main>
 
   <script></script>
 </body>
