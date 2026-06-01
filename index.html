@@ -6,8 +6,61 @@
   <title>Review Job Application</title>
 </head>
 <body>
+<h1>Application Reviewer</h1>
+<input type="text" id="companyInput" placeholder="Company name...">
+<input type="text" id="positionInput" placeholder="Position...">
 
-  
+<div class="application-status-container">
+  <label for="app-status" class="status-label">Application Status:</label>
+  <select id="app-status" name="applicationStatus" class="status-select modern-dropdown" required>
+    <option value="" disabled selected>Select status...</option>
+    <option value="review" class="status-option option-review"> Review</option>
+    <option value="interview" class="status-option option-interview">Interview</option>
+    <option value="offer" class="status-option option-offer">Offer </option>
+    <option value="rejected" class="status-option option-rejected">Rejected</option>
+  </select>
+</div>
+
+     <button class="add">Add</button>
+     <input type="text"id="SearchInput" placeholder="Search applications...">
+
+     <div class="filters-container">
+    <div class="filter-group">
+        <label for="app-status-filter" class="filter-label">Filter by Status:</label>
+        <select id="app-status-filter" class="modern-dropdown filter-control" name="appStatusFilter">
+            <option value="all">All Applications</option>
+            <option value="review"> Review</option>
+            <option value="interview">Interview</option>
+            <option value="offer">Offer</option>
+            <option value="rejected">Rejected</option>
+        </select>
+    </div>
+</div>
+
+    <section class="dashboard-stats" id="app-stats">
+        <div class="stat-card" id="stat-total">
+            <h3 class="stat-title">Total Applications</h3>
+            <p class="stat-value">12</p>
+        </div>
+        <div class="stat-card" id="stat-interviewing">
+            <h3 class="stat-title">Interviewing</h3>
+            <p class="stat-value">3</p>
+        </div>
+        <div class="stat-card" id="stat-offers">
+            <h3 class="stat-title">Offers</h3>
+            <p class="stat-value">1</p>
+        </div>
+        <div class="stat-card" id="stat-rejected">
+            <h3 class="stat-title">Archived</h3>
+            <p class="stat-value">8</p>
+        </div>
+    </section>
+
+    <div id="applicationListContainer"></div>
+
+
+
+
   <script></script>
 </body>
 </html>
