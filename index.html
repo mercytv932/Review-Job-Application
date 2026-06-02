@@ -5,6 +5,11 @@
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Job Application Trcaker</title>
+  <style>
+    body{
+      background-color: rgb(18, 129, 76);
+    }
+  </style>
 </head>
 <body>
   <main class="app">
@@ -134,9 +139,6 @@ const statRejected = document.querySelector("#stat-rejected .stat-value");
 
 const applications = [];
 
-addButton.addEventListener("click", ()=>{
-  renderApplications();
-})
 applicationForm.addEventListener("submit",(event)=>{
   event.preventDefault();
 const company = companyInput.value;
@@ -155,6 +157,8 @@ renderApplications();
 
 function renderApplications(){
   applicationListContainer.innerHTML = "";
+  console.log(applications);
+
   applications.forEach(application =>{
 
     const cardDiv = document.createElement("div");
