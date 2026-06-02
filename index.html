@@ -159,7 +159,7 @@ function renderApplications(){
   applicationListContainer.innerHTML = "";
   console.log(applications);
 
-  applications.forEach(application =>{
+  applications.forEach((application, index) =>{
 
     const cardDiv = document.createElement("div");
 
@@ -172,12 +172,25 @@ function renderApplications(){
     const statusP = document.createElement("p");
     statusP.textContent = application.status;
 
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+
+    deleteBtn.addEventListener("click", ()=>{
+      applications.splice(index, 1);
+      renderApplications();
+    });
+
     cardDiv.appendChild(companyP);
     cardDiv.appendChild(positionP);
     cardDiv.appendChild(statusP);
+    cardDiv.appendChild(deleteBtn);
 
     applicationListContainer.appendChild(cardDiv);
   });
+
+  companyInput.value = "";
+  positionInput.value = "";
+  statusInput.value = "";
 }
 
 
