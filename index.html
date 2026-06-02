@@ -155,11 +155,12 @@ applications.push(job);
 renderApplications();
 });
 
-function renderApplications(){
+
+function renderApplications(applicationsToShow = applications){
   applicationListContainer.innerHTML = "";
   console.log(applications);
 
-  applications.forEach((application, index) =>{
+  applicationsToShow.forEach((application, index) =>{
 
     const cardDiv = document.createElement("div");
 
@@ -194,6 +195,20 @@ function renderApplications(){
 }
 
 
+
+function searchApplications(){
+  const searchTerm = searchInput.value.toLowerCase();
+
+  const filteredApplications = applications.filter(application =>{
+    return(
+      application.company.toLowerCase().includes(searchTerm) ||
+      application.position.toLowerCase().includes(searchTerm)
+    );
+  })
+  renderApplications(filteredApplications);
+  }
+
+  searchInput.addEventListener("input", searchApplications);
   </script>
 </body>
 </html>
