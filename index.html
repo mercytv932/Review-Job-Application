@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Job Application Reviewer</title>
+  <title>Job Application Trcaker</title>
 </head>
 <body>
   <main class="app">
-    <h1>Application Reviewer</h1>
+    <h1>Application Tracker</h1>
 
     <form class="application-form" id="application-form">
       <div class="form-group">
@@ -119,6 +119,7 @@
 const companyInput = document.querySelector("#company-input");
 const positionInput = document.querySelector("#position-input");
 const statusInput = document.querySelector("#status-input");
+const addButton = document.querySelector(".add-button");
 
 const searchInput = document.querySelector("#search-input");
 const statusFilter = document.querySelector("#status-filter");
@@ -131,17 +132,50 @@ const statInterview = document.querySelector("#stat-interview .stat-value");
 const statOffer = document.querySelector("#stat-offer .stat-value");
 const statRejected = document.querySelector("#stat-rejected .stat-value");
 
-const application = [];
+const applications = [];
+
+addButton.addEventListener("click", ()=>{
+  renderApplications();
+})
+applicationForm.addEventListener("submit",(event)=>{
+  event.preventDefault();
 const company = companyInput.value;
 const position = positionInput.value;
 const status = statusInput.value;
 
 const job = {
-  comapany: company,
+  company: company,
   position :position,
   status: status
 }
-application.push(job);
+applications.push(job);
+
+renderApplications();
+});
+
+function renderApplications(){
+  applicationListContainer.innerHTML = "";
+  applications.forEach(application =>{
+
+    const cardDiv = document.createElement("div");
+
+    const companyP = document.createElement("p");
+    companyP.textContent = application.company;
+
+    const positionP = document.createElement("p");
+    positionP.textContent = application.position;
+
+    const statusP = document.createElement("p");
+    statusP.textContent = application.status;
+
+    cardDiv.appendChild(companyP);
+    cardDiv.appendChild(positionP);
+    cardDiv.appendChild(statusP);
+
+    applicationListContainer.appendChild(cardDiv);
+  });
+}
+
 
   </script>
 </body>
