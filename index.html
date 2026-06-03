@@ -182,6 +182,7 @@ function renderApplications(applicationsToShow = applications){
 
     deleteBtn.addEventListener("click", ()=>{
       applications.splice(index, 1);
+
       renderApplications();
     });
 
@@ -206,6 +207,12 @@ function searchApplications(){
   })
   renderApplications(filteredApplications);
   }
+
+  companyInput, searchInput.addEventListener("keydown", (event)=>{
+    if(event.key==="Enter"){
+      addButton.click();
+    }
+  });
 
   searchInput.addEventListener("input", searchApplications);
   </script>
