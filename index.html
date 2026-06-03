@@ -153,6 +153,10 @@ const job = {
 applications.push(job);
 
 renderApplications();
+
+  companyInput.value = "";
+  positionInput.value = "";
+  statusInput.value = "";
 });
 
 
@@ -188,12 +192,7 @@ function renderApplications(applicationsToShow = applications){
 
     applicationListContainer.appendChild(cardDiv);
   });
-
-  companyInput.value = "";
-  positionInput.value = "";
-  statusInput.value = "";
 }
-
 
 
 function searchApplications(){
