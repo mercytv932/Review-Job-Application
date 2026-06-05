@@ -145,9 +145,9 @@ const position = positionInput.value;
 const status = statusInput.value;
 
 const job = {
-  company: company,
-  position :position,
-  status: status
+  company,
+  position,
+  status
 }
 applications.push(job);
 
@@ -161,7 +161,6 @@ saveToLocalStorage();
 });
 
 
-
 function renderApplications(applicationsToShow = applications){
   applicationListContainer.innerHTML = "";
 
@@ -170,7 +169,7 @@ function renderApplications(applicationsToShow = applications){
     return;
   }
 
-  applicationsToShow.forEach((application, index) =>{
+  applicationsToShow.forEach((application,)=>{
     const actualIndex = applications.indexOf(application);
 
     const cardDiv = document.createElement("div");
