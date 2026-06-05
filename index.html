@@ -137,6 +137,21 @@ const statInterview = document.querySelector("#stat-interview .stat-value");
 const statOffer = document.querySelector("#stat-offer .stat-value");
 const statRejected = document.querySelector("#stat-rejected .stat-value");
 
+function dropDownFilter(){
+  const selectedStatus = statusFilter.value;
+  
+  const filtered = applications.filter(application => {
+    if(selectedStatus === "all") {
+      return true;
+    }
+    return application.status === selectedStatus;
+  });
+  
+  renderApplications(filtered);
+}
+
+statusFilter.addEventListener("change", dropDownFilter);
+
 const applications = [];
 
 applicationForm.addEventListener("submit",(event)=>{
@@ -165,6 +180,7 @@ function renderApplications(applicationsToShow = applications){
   console.log(applications);
 
   applicationsToShow.forEach((application, index) =>{
+    const actualIndex = applications.indexOf(application);
 
     const cardDiv = document.createElement("div");
 
@@ -181,9 +197,8 @@ function renderApplications(applicationsToShow = applications){
     deleteBtn.textContent = "Delete";
 
     deleteBtn.addEventListener("click", ()=>{
-      applications.splice(index, 1);
-
-      renderApplications();
+      applications.splice(actualIndex, 1);
+      dropDownFilter();
     });
 
     cardDiv.appendChild(companyP);
@@ -215,6 +230,8 @@ function searchApplications(){
   });
 
   searchInput.addEventListener("input", searchApplications);
+
+
   </script>
 </body>
 </html>
