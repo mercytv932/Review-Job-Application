@@ -87,7 +87,7 @@
     <section class="dashboard-stats" id="app-stats">
       <div class="stat-card" id="stat-total">
         <h2 class="stat-title">Total Applications</h2>
-        <p class="stat-value">12</p>
+        <p class="stat-value">0</p>
       </div>
 
       <div class="stat-card" id="stat-review">
@@ -97,17 +97,17 @@
 
       <div class="stat-card" id="stat-interview">
         <h2 class="stat-title">Interviewing</h2>
-        <p class="stat-value">3</p>
+        <p class="stat-value">0</p>
       </div>
 
       <div class="stat-card" id="stat-offer">
         <h2 class="stat-title">Offers</h2>
-        <p class="stat-value">1</p>
+        <p class="stat-value">0</p>
       </div>
 
       <div class="stat-card" id="stat-rejected">
         <h2 class="stat-title">Rejected</h2>
-        <p class="stat-value">8</p>
+        <p class="stat-value">0</p>
       </div>
     </section>
 
@@ -236,6 +236,7 @@ function renderApplications(applicationsToShow = applications){
   });
 }
 
+
 function searchApplications(){
   const searchTerm = searchInput.value.toLowerCase();
 
@@ -253,7 +254,9 @@ function searchApplications(){
       addButton.click();
     }
   });
+
   searchInput.addEventListener("input", searchApplications);
+
 
   </script>
 </body>
