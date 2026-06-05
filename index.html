@@ -161,8 +161,14 @@ saveToLocalStorage();
 });
 
 
+
 function renderApplications(applicationsToShow = applications){
   applicationListContainer.innerHTML = "";
+
+  if(applicationsToShow.length===0){
+    applicationListContainer.textContent = "No Applications Yet! please add one";
+    return;
+  }
 
   applicationsToShow.forEach((application, index) =>{
     const actualIndex = applications.indexOf(application);
