@@ -7,7 +7,7 @@
   <title>Job Application Tracker</title>
   <style>
     body{
-      background-color: rgb(18, 129, 76);
+      background-color: rgb(80, 202, 143);
     }
   </style>
 </head>
@@ -153,6 +153,7 @@ applications.push(job);
 
 applyFilters();
 updateDashBoard();
+saveToLocalStorage();
 
   companyInput.value = "";
   positionInput.value = "";
@@ -184,6 +185,7 @@ function renderApplications(applicationsToShow = applications){
       applications.splice(actualIndex, 1);
       applyFilters();
       updateDashBoard();
+      saveToLocalStorage();
     });
 
     cardDiv.appendChild(companyP);
@@ -241,9 +243,31 @@ function updateDashBoard(){
   });
    statRejected.textContent = rejectedApplications.length;
 }
-applyFilters();
-updateDashBoard();
 
+function saveToLocalStorage(){
+  localStorage.setItem('applications', JSON.stringify(applications));
+}
+
+function loadFromLocalStorage(){
+  const storedApplicationsString = localStorage.getItem('applications');
+
+  if(storedApplicationsString){
+    try{
+      const  parsedApplications = JSON.parse(storedApplicationsString);
+
+      parsedApplications.forEach(application =>{
+        applications.push(application);
+      });
+
+    }catch(error){
+      console.error("Error parsing applications from localStorage", error);
+    }
+  }
+  applyFilters();
+  updateDashBoard();
+}
+
+loadFromLocalStorage();
   </script>
 </body>
 </html>
