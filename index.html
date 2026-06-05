@@ -9,6 +9,24 @@
     body{
       background-color: rgb(80, 202, 143);
     }
+
+    .review {
+      background: lightblue;
+    }
+
+    .interview {
+      background: gold;
+    }
+
+    .offer {
+      background: lightgreen;
+    }
+
+    .rejected {
+      background: salmon;
+    }
+
+    
   </style>
 </head>
 <body>
@@ -143,11 +161,13 @@ applicationForm.addEventListener("submit",(event)=>{
 const company = companyInput.value;
 const position = positionInput.value;
 const status = statusInput.value;
+const dateApplied = new Date().toLocaleDateString();
 
 const job = {
   company,
   position,
-  status
+  status,
+  dateApplied
 }
 applications.push(job);
 
@@ -182,21 +202,33 @@ function renderApplications(applicationsToShow = applications){
 
     const statusP = document.createElement("p");
     statusP.textContent = application.status;
+    statusP.classList.add(application.status);
+
+    const dateP = document.createElement("p");
+    dateP.textContent = `Applied: ${application.dateApplied}`
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
 
     deleteBtn.addEventListener("click", ()=>{
-      applications.splice(actualIndex, 1);
+
+      const isConfirmed = window.confirm("Are you sure?");
+
+      if (isConfirmed){
+       applications.splice(actualIndex, 1);
+
       applyFilters();
       updateDashBoard();
       saveToLocalStorage();
+      }
+      
     });
 
     cardDiv.appendChild(companyP);
     cardDiv.appendChild(positionP);
     cardDiv.appendChild(statusP);
     cardDiv.appendChild(deleteBtn);
+    cardDiv.appendChild(dateP);
 
     applicationListContainer.appendChild(cardDiv);
   });
