@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Job Application Trcaker</title>
+  <title>Job Application Tracker</title>
   <style>
     body{
       background-color: rgb(18, 129, 76);
@@ -124,7 +124,6 @@
 const companyInput = document.querySelector("#company-input");
 const positionInput = document.querySelector("#position-input");
 const statusInput = document.querySelector("#status-input");
-const addButton = document.querySelector(".add-button");
 
 const searchInput = document.querySelector("#search-input");
 const statusFilter = document.querySelector("#status-filter");
@@ -196,35 +195,8 @@ function renderApplications(applicationsToShow = applications){
   });
 }
 
-
-// function searchApplications(){
-//   const searchTerm = searchInput.value.toLowerCase();
-
-//   const filteredApplications = applications.filter(application =>{
-//     return(
-//       application.company.toLowerCase().includes(searchTerm) ||
-//       application.position.toLowerCase().includes(searchTerm)
-//     );
-//   })
-//   renderApplications(filteredApplications);
-//   }
-
   searchInput.addEventListener("input", applyFilters);
   statusFilter.addEventListener("change", applyFilters);
-
-
-//   function dropDownFilter(){
-//   const selectedStatus = statusFilter.value;
-  
-//   const filtered = applications.filter(application => {
-//     if(selectedStatus === "all") {
-//       return true;
-//     }
-//     return application.status === selectedStatus;
-//   });
-  
-//   renderApplications(filtered);
-// }
 
 
 function applyFilters() {
@@ -244,7 +216,6 @@ function applyFilters() {
 
   renderApplications(filtered);
 }
-
 
 
 function updateDashBoard(){
@@ -270,7 +241,8 @@ function updateDashBoard(){
   });
    statRejected.textContent = rejectedApplications.length;
 }
-
+applyFilters();
+updateDashBoard();
 
   </script>
 </body>
