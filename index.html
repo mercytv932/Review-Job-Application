@@ -150,6 +150,30 @@ function dropDownFilter(){
   renderApplications(filtered);
 }
 
+function updateDashBoard(){
+  statTotal.textContent = applications.length;
+  
+  const reviewApplications = applications.filter(application =>{
+    return application.status === "review";
+  });
+  statReview.textContent = reviewApplications.length;
+
+  const interviewApplications = applications.filter(application=>{
+    return application.status ==="interview";
+  });
+  statInterview.textContent = interviewApplications.length;
+
+  const offerApplications = applications.filter(application =>{
+    return application.status ==="offer";
+  });
+   statOffer.textContent = offerApplications.length;
+
+  const rejectedApplications = applications.filter(application=>{
+    return application.status ==="rejected";
+  });
+   statRejected.textContent = rejectedApplications.length;
+}
+
 statusFilter.addEventListener("change", dropDownFilter);
 
 const applications = [];
@@ -168,6 +192,7 @@ const job = {
 applications.push(job);
 
 renderApplications();
+updateDashBoard();
 
   companyInput.value = "";
   positionInput.value = "";
@@ -199,6 +224,7 @@ function renderApplications(applicationsToShow = applications){
     deleteBtn.addEventListener("click", ()=>{
       applications.splice(actualIndex, 1);
       dropDownFilter();
+      updateDashBoard();
     });
 
     cardDiv.appendChild(companyP);
