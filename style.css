@@ -72,6 +72,7 @@ select {
   width: 42px;
   height: 42px;
   border-radius: 10px;
+  color: white;
   background: linear-gradient(135deg, #3b82f6, #9333ea);
   box-shadow: 0 12px 30px rgba(124, 77, 255, 0.42);
 }
@@ -171,10 +172,16 @@ select {
   box-shadow: var(--shadow);
 }
 
-.rocket {
-  font-size: 48px;
-  line-height: 1;
-  margin-bottom: 18px;
+.motivation-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 18px;
+  border-radius: 16px;
+  color: white;
+  background: linear-gradient(135deg, #7c3aed, #3b82f6);
+  font-weight: 800;
 }
 
 .motivation-card strong {
@@ -252,21 +259,6 @@ header p {
   color: #dfe6ff;
   background: rgba(12, 22, 44, 0.72);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
-}
-
-.avatar {
-  display: grid;
-  place-items: center;
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #4f46e5, #8b5cf6);
-  font-weight: 800;
-  font-size: 20px;
-  box-shadow: 0 14px 32px rgba(124, 77, 255, 0.34);
-}
-
-.user-name {
   font-weight: 700;
 }
 
@@ -504,13 +496,11 @@ header p {
   background: rgba(5, 12, 28, 0.76);
 }
 
-.application-list {
-  position: relative;
+.applications-panel {
   min-height: 330px;
-  padding: 76px 18px 18px;
+  padding: 24px 20px 18px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  color: var(--muted);
   background:
     linear-gradient(180deg, rgba(19, 29, 59, 0.72), rgba(8, 15, 33, 0.86)),
     radial-gradient(circle at 12% 0%, rgba(124, 77, 255, 0.16), transparent 35%);
@@ -518,23 +508,32 @@ header p {
   overflow: hidden;
 }
 
-.application-list::before {
-  content: "Company              Position              Status              Applied Date              Actions";
-  position: absolute;
-  top: 24px;
-  left: 20px;
-  right: 20px;
-  padding-bottom: 18px;
+.application-table-head {
+  display: grid;
+  grid-template-columns: minmax(180px, 1.15fr) minmax(180px, 1fr) 150px minmax(180px, 0.9fr) 48px 68px;
+  gap: 16px;
+  align-items: center;
+  padding: 0 8px 18px;
   border-bottom: 1px solid var(--line);
   color: #96a0bb;
   font-size: 15px;
   font-weight: 650;
-  white-space: pre;
+}
+
+.application-table-head .actions-head {
+  grid-column: 5 / 7;
+}
+
+.application-list {
+  min-height: 230px;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .application-list > div {
   display: grid;
-  grid-template-columns: minmax(150px, 1.1fr) minmax(160px, 1.1fr) 150px minmax(160px, 0.9fr) 48px 68px;
+  grid-template-columns: minmax(180px, 1.15fr) minmax(180px, 1fr) 150px minmax(180px, 0.9fr) 48px 68px;
   gap: 16px;
   align-items: center;
   min-height: 76px;
@@ -662,13 +661,16 @@ footer p {
   }
 
   .application-form,
-  .controls,
-  .application-list > div {
+  .controls {
     grid-template-columns: 1fr;
   }
 
-  .application-list::before {
-    content: "Applications";
+  .application-table-head {
+    display: none;
+  }
+
+  .application-list > div {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -689,9 +691,5 @@ footer p {
 
   .dashboard-stats {
     grid-template-columns: 1fr;
-  }
-
-  .application-list {
-    padding-top: 70px;
   }
 }
