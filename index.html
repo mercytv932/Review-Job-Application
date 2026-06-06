@@ -8,120 +8,156 @@
 </head>
 <body>
   <main class="app">
-    <header>
-      <div class="headline">
-        <h1>Job Application Tracker</h1>
-        <p>Track and manage your job applications in one place</p>
-      </div>
-    </header>
-
-    <form class="application-form" id="application-form">
-      <div class="form-group">
-        <label for="company-input">Company Name</label>
-        <input
-          type="text"
-          id="company-input"
-          name="company"
-          placeholder="e.g. Splunk"
-          required
-        />
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">▣</span>
+        <strong>Job<span>Tracker</span></strong>
       </div>
 
-      <div class="form-group">
-        <label for="position-input">Position</label>
-        <input
-          type="text"
-          id="position-input"
-          name="position"
-          placeholder="e.g. Software Engineer"
-          required
-        />
-      </div>
+      <button class="sidebar-cta" type="button">New Application</button>
 
-      <div class="form-group">
-        <label for="status-input">Application Status</label>
-        <select
-          id="status-input"
-          name="applicationStatus"
-          class="modern-dropdown"
-          required
-        >
-          <option value="" disabled selected>Select status...</option>
-          <option value="review">Review</option>
-          <option value="interview">Interview</option>
-          <option value="offer">Offer</option>
-          <option value="rejected">Rejected</option>
-        </select>
-      </div>
+      <nav class="nav" aria-label="Dashboard navigation">
+        <a href="#" class="active">Dashboard</a>
+        <a href="#">Applications</a>
+        <a href="#">Calendar</a>
+        <a href="#">Notes</a>
+        <a href="#">Analytics</a>
+        <a href="#">Settings</a>
+      </nav>
 
-      <button type="submit" class="addBtn">Add Application</button>
-    </form>
+      <section class="motivation-card">
+        <div class="rocket">🚀</div>
+        <strong>Keep going, Yosef!</strong>
+        <p>Every application is a step closer to your goal.</p>
+        <div class="progress"><span></span></div>
+        <p>Keep pushing forward!</p>
+      </section>
+    </aside>
 
-    <section class="controls">
-      <div class="form-group">
-        <label for="search-input">Search Applications</label>
-        <input
-          type="text"
-          id="search-input"
-          name="search"
-          placeholder="Search by position or company..."
-        />
-      </div>
+    <section class="main">
+      <header>
+        <div>
+          <h1>Dashboard</h1>
+          <p>Track and manage your job applications</p>
+        </div>
 
-      <div class="form-group">
-        <label for="status-filter">Filter by Status</label>
-        <select
-          id="status-filter"
-          name="statusFilter"
-          class="modern-dropdown"
-        >
-          <option value="all">All Applications</option>
-          <option value="review">Review</option>
-          <option value="interview">Interview</option>
-          <option value="offer">Offer</option>
-          <option value="rejected">Rejected</option>
-        </select>
-      </div>
+        <div class="top-actions">
+          <div class="icon-button">☼</div>
+          <div class="icon-button">♢</div>
+          <div class="avatar">Y</div>
+          <div class="user-name">Yosef</div>
+        </div>
+      </header>
+
+      <section class="dashboard-stats" id="app-stats">
+        <div class="stat-card" id="stat-total">
+          <h2 class="stat-title">Total Applications</h2>
+          <p class="stat-value">0</p>
+        </div>
+
+        <div class="stat-card" id="stat-review">
+          <h2 class="stat-title">In Review</h2>
+          <p class="stat-value">0</p>
+        </div>
+
+        <div class="stat-card" id="stat-interview">
+          <h2 class="stat-title">Interviewing</h2>
+          <p class="stat-value">0</p>
+        </div>
+
+        <div class="stat-card" id="stat-offer">
+          <h2 class="stat-title">Offers</h2>
+          <p class="stat-value">0</p>
+        </div>
+
+        <div class="stat-card" id="stat-rejected">
+          <h2 class="stat-title">Rejected</h2>
+          <p class="stat-value">0</p>
+        </div>
+      </section>
+
+      <form class="application-form" id="application-form">
+        <div class="form-group">
+          <label for="company-input">Company Name</label>
+          <input
+            type="text"
+            id="company-input"
+            name="company"
+            placeholder="e.g. Google"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="position-input">Position</label>
+          <input
+            type="text"
+            id="position-input"
+            name="position"
+            placeholder="e.g. Software Engineer"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="status-input">Application Status</label>
+          <select
+            id="status-input"
+            name="applicationStatus"
+            class="modern-dropdown"
+            required
+          >
+            <option value="" disabled selected>Select status...</option>
+            <option value="review">Review</option>
+            <option value="interview">Interview</option>
+            <option value="offer">Offer</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+
+        <button type="submit" class="addBtn">Add Application</button>
+      </form>
+
+      <section class="controls">
+        <div class="form-group">
+          <label for="search-input">Search Applications</label>
+          <input
+            type="text"
+            id="search-input"
+            name="search"
+            placeholder="Search by company or position..."
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="status-filter">Filter by Status</label>
+          <select
+            id="status-filter"
+            name="statusFilter"
+            class="modern-dropdown"
+          >
+            <option value="all">All Status</option>
+            <option value="review">Review</option>
+            <option value="interview">Interview</option>
+            <option value="offer">Offer</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+      </section>
+
+      <section
+        id="application-list-container"
+        class="application-list"
+        aria-live="polite"
+      ></section>
+
+      <footer>
+        <p>&hearts; Stay positive. Keep applying. Your opportunity is coming!</p>
+        <p>&copy; 2026 Job Application Tracker</p>
+      </footer>
     </section>
-
-    <section class="dashboard-stats" id="app-stats">
-      <div class="stat-card" id="stat-total">
-        <h2 class="stat-title">Total Applications</h2>
-        <p class="stat-value">0</p>
-      </div>
-
-      <div class="stat-card" id="stat-review">
-        <h2 class="stat-title">In Review</h2>
-        <p class="stat-value">0</p>
-      </div>
-
-      <div class="stat-card" id="stat-interview">
-        <h2 class="stat-title">Interviewing</h2>
-        <p class="stat-value">0</p>
-      </div>
-
-      <div class="stat-card" id="stat-offer">
-        <h2 class="stat-title">Offers</h2>
-        <p class="stat-value">0</p>
-      </div>
-
-      <div class="stat-card" id="stat-rejected">
-        <h2 class="stat-title">Rejected</h2>
-        <p class="stat-value">0</p>
-      </div>
-    </section>
-
-    <section
-      id="application-list-container"
-      class="application-list"
-      aria-live="polite"
-    ></section>
-
-    <footer>
-      <p>&hearts; Stay positive. Keep applying. Your opportunity is coming!</p>
-      <p>&copy; 2026 Job Application Tracker</p>
-    </footer>
   </main>
+
   <script src="script.js"></script>
 </body>
 </html>
