@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Job Application Tracker</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <main class="app">
     <aside class="sidebar">
       <div class="brand">
-        <span class="brand-mark">▣</span>
+        <span class="brand-mark">J</span>
         <strong>Job<span>Tracker</span></strong>
       </div>
 
@@ -26,11 +27,11 @@
       </nav>
 
       <section class="motivation-card">
-        <div class="rocket">🚀</div>
-        <strong>Keep going, Yosef!</strong>
-        <p>Every application is a step closer to your goal.</p>
+        <div class="rocket">Goal</div>
+        <strong>Keep going!</strong>
+        <p>Every application is a step closer to the next opportunity.</p>
         <div class="progress"><span></span></div>
-        <p>Keep pushing forward!</p>
+        <p>Keep pushing forward.</p>
       </section>
     </aside>
 
@@ -42,10 +43,8 @@
         </div>
 
         <div class="top-actions">
-          <div class="icon-button">☼</div>
-          <div class="icon-button">♢</div>
-          <div class="avatar">Y</div>
-          <div class="user-name">Yosef</div>
+          <div class="icon-button">Light</div>
+          <div class="icon-button">Bell</div>
         </div>
       </header>
 
@@ -145,11 +144,21 @@
         </div>
       </section>
 
-      <section
-        id="application-list-container"
-        class="application-list"
-        aria-live="polite"
-      ></section>
+      <section class="applications-panel">
+        <div class="application-table-head">
+          <span>Company</span>
+          <span>Position</span>
+          <span>Status</span>
+          <span>Applied Date</span>
+          <span class="actions-head">Actions</span>
+        </div>
+
+        <section
+          id="application-list-container"
+          class="application-list"
+          aria-live="polite"
+        ></section>
+      </section>
 
       <footer>
         <p>&hearts; Stay positive. Keep applying. Your opportunity is coming!</p>
@@ -157,7 +166,6 @@
       </footer>
     </section>
   </main>
-
   <script src="script.js"></script>
 </body>
 </html>
