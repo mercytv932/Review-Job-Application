@@ -2,36 +2,570 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Job Application Tracker</title>
   <style>
-    body{
-      background-color: rgb(80, 202, 143);
+    :root {
+      --ink: #10182f;
+      --text: #253455;
+      --muted: #64708a;
+      --line: #dce5ef;
+      --green: #009b6b;
+      --green-dark: #007c57;
+      --blue: #0b71d9;
+      --amber: #c98200;
+      --red: #d81522;
+      --panel: rgba(255, 255, 255, 0.92);
+      --shadow: 0 18px 45px rgba(28, 49, 78, 0.14);
+      --soft-shadow: 0 8px 24px rgba(28, 49, 78, 0.11);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 4% 12%, rgba(0, 166, 118, 0.22), transparent 25%),
+        radial-gradient(circle at 92% 8%, rgba(16, 185, 129, 0.14), transparent 22%),
+        linear-gradient(180deg, #f8fcff 0%, #eef8fb 52%, #f7fbfd 100%);
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .app {
+      width: min(100%, 1900px);
+      margin: 0 auto;
+      padding: 30px 46px 28px;
+    }
+
+    header {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 34px;
+      min-height: 108px;
+      margin-bottom: 24px;
+      background: transparent;
+    }
+
+    header::before {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      color: white;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.26), transparent),
+        linear-gradient(145deg, #00b47f, #008b62);
+      box-shadow: 0 16px 30px rgba(0, 145, 103, 0.25);
+      font-size: 42px;
+      font-weight: 300;
+    }
+
+    header::after {
+      content: "Keep going!  Great things take time.";
+      justify-self: end;
+      width: min(350px, 28vw);
+      padding: 20px 28px 20px 76px;
+      border: 1px solid #bde8d9;
+      border-radius: 8px;
+      color: #223554;
+      background:
+        radial-gradient(circle at 36px center, transparent 0 16px, rgba(255,255,255,0) 17px),
+        rgba(243, 255, 250, 0.76);
+      box-shadow: 0 8px 26px rgba(0, 129, 91, 0.08);
+      font-size: 15px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(34px, 3.15vw, 48px);
+      line-height: 1;
+      letter-spacing: 0;
+      color: var(--ink);
+    }
+
+    .headline p {
+      margin: 0;
+      color: #2a3b5b;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .application-form,
+    .controls,
+    .application-list {
+      border: 1px solid rgba(216, 226, 237, 0.92);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .application-form {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.88fr) auto;
+      gap: 32px;
+      align-items: end;
+      padding: 78px 28px 28px;
+      margin-bottom: 32px;
+    }
+
+    .application-form::before {
+      content: "+  Add New Application";
+      position: absolute;
+      top: 28px;
+      left: 28px;
+      color: var(--green-dark);
+      font-size: 21px;
+      font-weight: 850;
+    }
+
+    .form-group {
+      display: grid;
+      gap: 12px;
+    }
+
+    .form-group label {
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      min-height: 62px;
+      padding: 0 20px;
+      border: 1px solid #cfd9e6;
+      border-radius: 8px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.9);
+      outline: none;
+      transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+    }
+
+    .form-group input::placeholder {
+      color: #647491;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #00a777;
+      box-shadow: 0 0 0 4px rgba(0, 155, 107, 0.13);
+    }
+
+    .addBtn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 232px;
+      min-height: 62px;
+      padding: 0 28px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      background: linear-gradient(145deg, #00ad7b, #008b62);
+      box-shadow: 0 12px 20px rgba(0, 145, 103, 0.24);
+      font-weight: 850;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+    }
+
+    .addBtn::before {
+      content: "+";
+      margin-right: 12px;
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 400;
+    }
+
+    .addBtn:hover {
+      transform: translateY(-1px);
+      filter: saturate(1.08);
+      box-shadow: 0 16px 26px rgba(0, 145, 103, 0.28);
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 28px;
+      margin-bottom: 30px;
+    }
+
+    .controls .form-group:first-child label::before {
+      content: "+";
+      margin-right: 10px;
+      color: var(--green);
+      font-size: 22px;
+      vertical-align: -1px;
+    }
+
+    .controls .form-group:last-child label::before {
+      content: "+";
+      margin-right: 10px;
+      color: var(--green);
+      font-size: 22px;
+      vertical-align: 1px;
+    }
+
+    .dashboard-stats {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 24px;
+      margin: 0 0 30px;
+    }
+
+    .stat-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      align-items: center;
+      min-height: 132px;
+      padding: 24px 24px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      text-align: left;
+      box-shadow: var(--soft-shadow);
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      display: grid;
+      place-items: center;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      font-size: 32px;
+      font-weight: 900;
+      grid-row: 1 / span 2;
+    }
+
+    .stat-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -34px -52px auto;
+      width: 116px;
+      height: 116px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+    }
+
+    .stat-title {
+      grid-column: 2;
+      margin: 44px 0 0;
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.25;
+      font-weight: 850;
+    }
+
+    .stat-value {
+      grid-column: 2;
+      grid-row: 1;
+      align-self: end;
+      margin: 0 0 -34px;
+      font-size: 40px;
+      line-height: 1;
+      font-weight: 950;
+    }
+
+    #stat-total {
+      color: #00745b;
+      border-color: #bdebdd;
+      background: linear-gradient(135deg, #e6fbf3, #f6fffb);
+    }
+
+    #stat-total::before {
+      content: "#";
+      background: #cbf4e7;
+    }
+
+    #stat-review {
+      color: #0066d6;
+      border-color: #cbe4ff;
+      background: linear-gradient(135deg, #edf7ff, #f9fdff);
+    }
+
+    #stat-review::before {
+      content: "O";
+      background: #dceeff;
+    }
+
+    #stat-interview {
+      color: #b87900;
+      border-color: #f6e0a8;
+      background: linear-gradient(135deg, #fff7de, #fffdf4);
+    }
+
+    #stat-interview::before {
+      content: "II";
+      background: #ffedbf;
+    }
+
+    #stat-offer {
+      color: #00854e;
+      border-color: #c4edcf;
+      background: linear-gradient(135deg, #e9faee, #f7fff8);
+    }
+
+    #stat-offer::before {
+      content: "$";
+      background: #cef4d9;
+    }
+
+    #stat-rejected {
+      color: #d60000;
+      border-color: #ffcaca;
+      background: linear-gradient(135deg, #ffe7e7, #fff7f7);
+    }
+
+    #stat-rejected::before {
+      content: "X";
+      background: #ffd4d4;
+    }
+
+    .application-list {
+      min-height: 280px;
+      padding: 84px 28px 28px;
+      margin-bottom: 24px;
+      color: #2d3e5f;
+      font-size: 18px;
+      font-weight: 750;
+      text-align: center;
+      position: relative;
+    }
+
+    .application-list::before {
+      content: "Your Applications";
+      position: absolute;
+      top: 28px;
+      left: 28px;
+      color: var(--green-dark);
+      font-size: 21px;
+      font-weight: 850;
+    }
+
+    .application-list::after {
+      content: "";
+      position: absolute;
+      top: 74px;
+      left: 28px;
+      right: 28px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .application-list > div {
+      display: grid;
+      grid-template-columns: minmax(220px, 1.35fr) minmax(190px, 1fr) 132px minmax(190px, 0.9fr) auto auto;
+      gap: 18px;
+      align-items: center;
+      min-height: 86px;
+      padding: 14px 18px;
+      border: 1px solid #e2e9f2;
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 8px 22px rgba(26, 42, 70, 0.1);
+      text-align: left;
+    }
+
+    .application-list > div + div {
+      margin-top: 10px;
+    }
+
+    .application-list > div p {
+      margin: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .application-list > div p:first-child {
+      color: var(--ink);
+      font-size: 19px;
+      font-weight: 900;
+    }
+
+    .application-list > div p:nth-child(2),
+    .application-list > div p:nth-child(4) {
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .application-list > div p:nth-child(4)::before {
+      content: "Applied ";
+      color: #76849e;
+    }
+
+    .application-list > div p:nth-child(3) {
+      justify-self: start;
+      min-width: 116px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 850;
+      text-transform: capitalize;
     }
 
     .review {
-      background: lightblue;
+      color: var(--blue);
+      border: 1px solid #c8e2ff;
+      background: #eaf5ff;
     }
 
     .interview {
-      background: gold;
+      color: var(--amber);
+      border: 1px solid #ffe3a3;
+      background: #fff6de;
     }
 
     .offer {
-      background: lightgreen;
+      color: var(--green-dark);
+      border: 1px solid #bce9cd;
+      background: #e5f8ed;
     }
 
     .rejected {
-      background: salmon;
+      color: var(--red);
+      border: 1px solid #ffc7c7;
+      background: #fff0f0;
     }
 
-    
+    .application-list button {
+      min-width: 98px;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 8px;
+      background: white;
+      font-weight: 850;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .application-list button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(20, 35, 60, 0.12);
+    }
+
+    .application-list button:nth-of-type(1) {
+      border: 1px solid #9fcbff;
+      color: #0074ff;
+    }
+
+    .application-list button:nth-of-type(2) {
+      border: 1px solid #ffadad;
+      color: #e60000;
+    }
+
+    footer {
+      margin-top: 24px;
+      padding: 6px 16px 0;
+      color: #455574;
+      background: transparent;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    footer p {
+      margin: 10px 0;
+    }
+
+    footer p:first-child {
+      color: #435374;
+    }
+
+    footer p:first-child::first-letter {
+      color: #ff8996;
+    }
+
+    @media (max-width: 1180px) {
+      header,
+      .application-form,
+      .controls,
+      .dashboard-stats,
+      .application-list > div {
+        grid-template-columns: 1fr;
+      }
+
+      header::before,
+      header::after {
+        justify-self: start;
+      }
+
+      .addBtn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .app {
+        padding: 18px;
+      }
+
+      header {
+        gap: 18px;
+      }
+
+      header::before {
+        width: 60px;
+        height: 60px;
+      }
+
+      header::after {
+        width: 100%;
+        padding-left: 22px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .headline p {
+        font-size: 16px;
+      }
+
+      .application-form,
+      .controls,
+      .application-list {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .application-form {
+        padding-top: 74px;
+      }
+
+      .stat-card {
+        min-height: 110px;
+      }
+    }
   </style>
 </head>
 <body>
   <main class="app">
-    <h1>Job Application Tracker</h1>
+    <header>
+      <div class="headline">
+        <h1>Job Application Tracker</h1>
+        <p>Track and manage your job applications in one place</p>
+      </div>
+    </header>
 
     <form class="application-form" id="application-form">
       <div class="form-group">
@@ -40,7 +574,7 @@
           type="text"
           id="company-input"
           name="company"
-          placeholder="Company name..."
+          placeholder="e.g. Splunk"
           required
         />
       </div>
@@ -51,7 +585,7 @@
           type="text"
           id="position-input"
           name="position"
-          placeholder="Position..."
+          placeholder="e.g. Software Engineer"
           required
         />
       </div>
@@ -72,7 +606,7 @@
         </select>
       </div>
 
-      <button type="submit" class="add-button">Add</button>
+      <button type="submit" class="addBtn">Add Application</button>
     </form>
 
     <section class="controls">
@@ -82,7 +616,7 @@
           type="text"
           id="search-input"
           name="search"
-          placeholder="Search applications..."
+          placeholder="Search by position or company..."
         />
       </div>
 
@@ -134,6 +668,11 @@
       class="application-list"
       aria-live="polite"
     ></section>
+
+    <footer>
+      <p>&hearts; Stay positive. Keep applying. Your opportunity is coming!</p>
+      <p>&copy; 2026 Job Application Tracker</p>
+    </footer>
   </main>
 
   <script>
@@ -142,7 +681,7 @@
 const companyInput = document.querySelector("#company-input");
 const positionInput = document.querySelector("#position-input");
 const statusInput = document.querySelector("#status-input");
-
+const addBtn = document.querySelector(".addBtn");
 const searchInput = document.querySelector("#search-input");
 const statusFilter = document.querySelector("#status-filter");
 
@@ -155,6 +694,8 @@ const statOffer = document.querySelector("#stat-offer .stat-value");
 const statRejected = document.querySelector("#stat-rejected .stat-value");
 
 const applications = [];
+let isEditing = false;
+let editingIndex = null;
 
 applicationForm.addEventListener("submit",(event)=>{
   event.preventDefault();
@@ -163,13 +704,26 @@ const position = positionInput.value;
 const status = statusInput.value;
 const dateApplied = new Date().toLocaleDateString();
 
+if(isEditing){
+  applications[editingIndex].company = company;
+  applications[editingIndex].position = position;
+  applications[editingIndex].status = status;
+
+  isEditing = false;
+  editingIndex = null;
+  addBtn.textContent = "Add";
+}
+else{
+
 const job = {
   company,
   position,
   status,
   dateApplied
-}
+};
 applications.push(job);
+}
+
 
 applyFilters();
 updateDashBoard();
@@ -189,7 +743,7 @@ function renderApplications(applicationsToShow = applications){
     return;
   }
 
-  applicationsToShow.forEach((application,)=>{
+  applicationsToShow.forEach((application)=>{
     const actualIndex = applications.indexOf(application);
 
     const cardDiv = document.createElement("div");
@@ -205,7 +759,7 @@ function renderApplications(applicationsToShow = applications){
     statusP.classList.add(application.status);
 
     const dateP = document.createElement("p");
-    dateP.textContent = `Applied: ${application.dateApplied}`
+    dateP.textContent = `Applied: ${application.dateApplied}`;
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
@@ -221,14 +775,29 @@ function renderApplications(applicationsToShow = applications){
       updateDashBoard();
       saveToLocalStorage();
       }
+
+    });
+
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    editBtn.addEventListener("click",()=>{
       
+     companyInput.value = application.company;
+     positionInput.value = application.position;
+     statusInput.value = application.status;
+
+     isEditing = true;
+     editingIndex = actualIndex;
+
+     addBtn.textContent = "Save";
     });
 
     cardDiv.appendChild(companyP);
     cardDiv.appendChild(positionP);
     cardDiv.appendChild(statusP);
-    cardDiv.appendChild(deleteBtn);
     cardDiv.appendChild(dateP);
+    cardDiv.appendChild(editBtn);
+    cardDiv.appendChild(deleteBtn);
 
     applicationListContainer.appendChild(cardDiv);
   });
