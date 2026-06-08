@@ -44,7 +44,7 @@ Technologies Used
 HTML5
 CSS3
 JavaScript (Vanilla JS)
-JavaScript Concepts Practiced
+JavaScript Concepts
 Arrays
 Objects
 Functions
