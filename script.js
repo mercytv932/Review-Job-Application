@@ -46,7 +46,6 @@ const job = {
 applications.push(job);
 }
 
-
 applyFilters();
 updateDashBoard();
 saveToLocalStorage();
@@ -55,7 +54,6 @@ saveToLocalStorage();
   positionInput.value = "";
   statusInput.value = "";
 });
-
 
 function renderApplications(applicationsToShow = applications){
   applicationListContainer.innerHTML = "";
@@ -128,7 +126,6 @@ function renderApplications(applicationsToShow = applications){
   searchInput.addEventListener("input", applyFilters);
   statusFilter.addEventListener("change", applyFilters);
 
-
 function applyFilters() {
   const searchTerm = searchInput.value.toLowerCase();
   const selectedStatus = statusFilter.value;
@@ -146,7 +143,6 @@ function applyFilters() {
 
   renderApplications(filtered);
 }
-
 
 function updateDashBoard(){
   statTotal.textContent = applications.length;
